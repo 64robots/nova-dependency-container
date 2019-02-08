@@ -72,25 +72,11 @@
 						this.dependenciesSatisfied = false;
 						return;
 					}
-					
-					if (Array.isArray(dependency.value)) {
-                                                if (typeof this.dependencyValues[dependency.field] === 'object'  && this.dependencyValues[dependency.field] !== null) {
-                                                    if(dependency.hasOwnProperty('value') && !dependency.value.includes(this.dependencyValues[dependency.field].id)) {
-                                                            this.dependenciesSatisfied = false;
-                                                            return;
-                                                    }
-                                                } else { 
-                                                    if(dependency.hasOwnProperty('value') && !dependency.value.includes(this.dependencyValues[dependency.field])) {
-                                                            this.dependenciesSatisfied = false;
-                                                            return;
-                                                    }
-                                                }
-					} else {
-						if(dependency.hasOwnProperty('value') && this.dependencyValues[dependency.field] !== dependency.value) {
-							this.dependenciesSatisfied = false;
-							return;
-						}
-				        }
+
+					if(dependency.hasOwnProperty('value') && this.dependencyValues[dependency.field] !== dependency.value) {
+						this.dependenciesSatisfied = false;
+						return;
+					}
 				}
 
 				this.dependenciesSatisfied = true;
@@ -99,12 +85,11 @@
 			fill(formData) {
 				if(this.dependenciesSatisfied) {
 					_.each(this.field.fields, field => {
-						if (field.fill) {
-							field.fill(formData)
-						}
+						field.fill(formData)
 					})
 				}
 			}
+
 		}
 	}
 </script>
