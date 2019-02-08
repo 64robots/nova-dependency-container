@@ -84,8 +84,8 @@
 
 			fill(formData) {
 				if(this.dependenciesSatisfied) {
-					_.each(this.field.fields, field => {
-						field.fill(formData)
+					this.$children.forEach(f => {
+						f.fill(formData)
 					})
 				}
 			}
